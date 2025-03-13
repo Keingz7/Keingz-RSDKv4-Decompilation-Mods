@@ -1,22 +1,19 @@
 # Keingz's RSDKv4 Decompilation Mods
 - Here you can see my Sonic the Hedgehog (2013) and Sonic the Hedgehog 2 (2013) mods.
 - Please note that you must have the game, along with the decompilation to be able to use the mods.
-# Download games
+# Downloads
 - You can download Sonic the Hedgehog (2013) [here](https://play.google.com/store/apps/details?id=com.sega.sonic1px&hl=en).
 - You can download Sonic the Hedgehog 2 (2013) [here](https://play.google.com/store/apps/details?id=com.sega.sonic2.runner&hl=en).
 - You can download The RSDKv4 (For Sonic the Hedgehog (2013) and Sonic the Hedgehog 2 (2013) Decompilation [here](https://github.com/RSDKModding/RSDKv4-Decompilation)
 - You can download The RSDKv4 Scripts (For Sonic the Hedgehog (2013) and Sonic the Hedgehog 2 (2013) Decompilation [here](https://github.com/RSDKModding/RSDKv4-Script-Decompilation)
-# Keingz's Gamebanana
-- [Here](https://gamebanana.com/members/2095392)
+# [Keingz's](https://gamebanana.com/members/2095392) Gamebanana
 # Mods Preview (Sonic the Hedgehog (2013)
 # Chaotix HUD in Sonic the Hedgehog (2013)
 ![Miniature (x2)](https://github.com/user-attachments/assets/0749d0b0-7e98-4fbf-b5b3-2b8e34f3bcaa)
-![Sprites](https://github.com/user-attachments/assets/5c6b4ce6-f101-4207-8ce9-2a7b626023d9)
 ![Sonic HUD](https://github.com/user-attachments/assets/e399824c-391a-4e37-8981-ebf80a106a6c)
 ![Tails Miles HUD](https://github.com/user-attachments/assets/e43b45f6-9322-4c57-99df-797cf78d2888)
 ![Knuckles HUD](https://github.com/user-attachments/assets/33402291-b4c8-4fb4-8fc3-2276aa9f7956)
 ![Amy HUD](https://github.com/user-attachments/assets/ebe53ab2-d11c-4800-827c-7d4c7da4c35b)
-![Sprites for Special Stage Results](https://github.com/user-attachments/assets/f915ce84-2dd1-4fd7-8c28-1d53e3876c54)
 ![Special Stage Results](https://github.com/user-attachments/assets/532494ff-3445-416f-bd93-42470665dcd6)
 # Italic HUD in Sonic the Hedgehog (2013)
 ![Miniature (x2)](https://github.com/user-attachments/assets/04e9c3e8-7d2e-450d-b9e8-c3d631a413d8)
