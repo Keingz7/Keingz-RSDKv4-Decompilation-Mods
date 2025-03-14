@@ -7,7 +7,7 @@
 - You can download The RSDKv4 (For Sonic the Hedgehog (2013) and Sonic the Hedgehog 2 (2013) Decompilation [here](https://github.com/RSDKModding/RSDKv4-Decompilation)
 - You can download The RSDKv4 Scripts (For Sonic the Hedgehog (2013) and Sonic the Hedgehog 2 (2013) Decompilation [here](https://github.com/RSDKModding/RSDKv4-Script-Decompilation)
 # [Keingz's](https://gamebanana.com/members/2095392) Gamebanana
-# Mods Preview (Sonic the Hedgehog (2013)
+# Mods Preview [Sonic the Hedgehog (2013)]
 # Chaotix HUD in Sonic the Hedgehog (2013)
 ![Miniature (x2)](https://github.com/user-attachments/assets/0749d0b0-7e98-4fbf-b5b3-2b8e34f3bcaa)
 ![Sonic HUD](https://github.com/user-attachments/assets/e399824c-391a-4e37-8981-ebf80a106a6c)
