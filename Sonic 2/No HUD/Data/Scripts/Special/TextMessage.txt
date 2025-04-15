@@ -1,0 +1,571 @@
+// ----------------------------------
+// RSDK Project: Sonic 2
+// Script Description: Text Message Object
+// Script Author: Christian Whitehead/Simon Thomley
+// Unpacked by Rubberduckycooly's script unpacker
+// ----------------------------------
+
+// ========================
+// Aliases
+// ========================
+
+private alias object.value0 : object.timer
+private alias object.value1 : object.textMessage
+private alias object.value2 : object.charPos.x
+private alias object.value3 : object.messageLength
+private alias object.value4 : object.number
+private alias object.value5 : object.angleOffset
+private alias object.value6 : object.scaleSpeed
+private alias object.value7 : object.rotateSpeed
+private alias object.value8 : object.spinDirection
+
+// Property Values
+private alias 0 : TEXTMESSAGE_COOL
+private alias 1 : TEXTMESSAGE_NOTENOUGH
+private alias 2 : TEXTMESSAGE_GETRINGS
+private alias 3 : TEXTMESSAGE_RINGREMINDER
+private alias 4 : TEXTMESSAGE_PLAYERPLAYER
+private alias 5 : TEXTMESSAGE_MOSTRINGSWIN
+private alias 6 : TEXTMESSAGE_P1WINS
+private alias 7 : TEXTMESSAGE_P2WINS
+private alias 8 : TEXTMESSAGE_TIE
+private alias 9 : TEXTMESSAGE_ANICHARACTER
+
+// Messages
+private alias 0  : MESSAGE_COOL
+private alias 1  : MESSAGE_NOTENOUGH
+private alias 2  : MESSAGE_RINGS
+private alias 3  : MESSAGE_GETRINGS1
+private alias 4  : MESSAGE_GETRINGS2
+private alias 5  : MESSAGE_GETRINGS3
+private alias 6  : MESSAGE_RINGTOGO
+private alias 7  : MESSAGE_RINGSTOGO1
+private alias 8  : MESSAGE_RINGSTOGO2
+private alias 9  : MESSAGE_RINGSTOGO3
+private alias 10 : MESSAGE_PLAYERPLAYER
+private alias 11 : MESSAGE_MOSTRINGSWINS
+private alias 12 : MESSAGE_P1WINS
+private alias 13 : MESSAGE_P2WINS
+private alias 14 : MESSAGE_TIE
+
+// Player Aliases
+private alias object.value0 : player.rings
+
+// Text Menu Info Type Aliases
+private alias 0 : TEXTINFO_TEXTDATA
+private alias 1 : TEXTINFO_TEXTSIZE
+
+
+// ========================
+// Function Declarations
+// ========================
+
+reserve function TextMessage_DrawMessage
+reserve function TextMessage_SetupTextChars
+
+
+// ========================
+// Function Definitions
+// ========================
+
+private function TextMessage_DrawMessage
+	// This function is called to *draw* a line of text
+	
+	GetTextInfo(object.messageLength, MENU_1, TEXTINFO_TEXTSIZE, object.textMessage, 0)
+
+	object.charPos.x = object.messageLength
+	object.charPos.x <<= 2
+	FlipSign(object.charPos.x)
+	object.charPos.x += screen.xcenter
+	object.charPos.x += 4
+
+	temp0 = 0
+	while object.messageLength > 0
+		GetTextInfo(temp1, MENU_1, TEXTINFO_TEXTDATA, object.textMessage, temp0)
+		switch temp1
+		case 33 // !
+			DrawSpriteScreenXY(37, object.charPos.x, object.ypos)
+			object.charPos.x += 8
+			break
+
+		case 35 // #
+			temp2 = object.number
+			temp2 /= 100
+			DrawSpriteScreenXY(temp2, object.charPos.x, object.ypos)
+			object.charPos.x += 8
+			break
+
+		case 36 // $
+			temp2 = object.number
+			temp2 %= 100
+			temp2 /= 10
+			DrawSpriteScreenXY(temp2, object.charPos.x, object.ypos)
+			object.charPos.x += 8
+			break
+
+		case 37 // %
+			temp2 = object.number
+			temp2 %= 10
+			DrawSpriteScreenXY(temp2, object.charPos.x, object.ypos)
+			object.charPos.x += 8
+			break
+
+		case 38 // &
+			DrawSpriteScreenXY(38, object.charPos.x, object.ypos)
+			object.charPos.x += 8
+			break
+
+		case 46 // .
+			DrawSpriteScreenXY(36, object.charPos.x, object.ypos)
+			object.charPos.x += 8
+			break
+
+		default
+			object.frame = 0
+			
+			// Translate uppercase letters to Sprite Frames
+			if temp1 > 64
+				if temp1 < 91
+					object.frame = temp1
+					object.frame -= 55
+				end if
+			end if
+			
+			// Translate lowercase letters to Sprite Frames
+			if temp1 > 96
+				if temp1 < 123
+					object.frame = temp1
+					object.frame -= 87
+				end if
+			end if
+			
+			if object.frame > 0
+				DrawSpriteScreenXY(object.frame, object.charPos.x, object.ypos)
+			end if
+			
+			object.charPos.x += 8
+			break
+			
+		end switch
+		
+		temp0++
+		object.messageLength--
+	loop
+end function
+
+
+private function TextMessage_SetupTextChars
+	// This function is called to create letter objects for every individual letter in a line, for when the message should separate and fall apart
+	// This is not to be confused with actually drawing the text normally, that's up above
+	
+	GetTextInfo(object.messageLength, MENU_1, TEXTINFO_TEXTSIZE, object.textMessage, 0)
+
+	object.charPos.x = object.messageLength
+	object.charPos.x <<= 2
+	FlipSign(object.charPos.x)
+	object.charPos.x += 4
+	object.charPos.x <<= 16
+
+	temp0 = 0
+	temp3 = object.ypos
+	temp3 <<= 16
+	object.angleOffset = 224
+	object.angleOffset /= object.messageLength
+	while object.messageLength > 0
+		GetTextInfo(temp1, MENU_1, TEXTINFO_TEXTDATA, object.textMessage, temp0)
+		object.frame = 255
+
+		switch temp1
+		case 33 // !
+			object.frame = 37
+			break
+
+		case 35 // #
+			temp2 = object.number
+			temp2 /= 100
+			object.frame = temp2
+			break
+
+		case 36 // $
+			temp2 = object.number
+			temp2 %= 100
+			temp2 /= 10
+			object.frame = temp2
+			break
+
+		case 37 // %
+			temp2 = object.number
+			temp2 %= 10
+			object.frame = temp2
+			break
+
+		case 38 // &
+			object.frame = 38
+			break
+
+		case 46 // .
+			object.frame = 36
+			break
+
+		default
+			if temp1 > 64
+				if temp1 < 91
+					object.frame = temp1
+					object.frame -= 55
+				end if
+			end if
+			
+			if temp1 > 96
+				if temp1 < 123
+					object.frame = temp1
+					object.frame -= 87
+				end if
+			end if
+			break
+			
+		end switch
+
+		if object.frame < 255
+			CreateTempObject(TypeName[Text Message], TEXTMESSAGE_ANICHARACTER, object.charPos.x, temp3)
+#platform: USE_STANDALONE
+			object[tempObjectPos].drawOrder = 5
+#endplatform
+#platform: USE_ORIGINS
+			object[tempObjectPos].drawOrder = 6
+#endplatform
+			object[tempObjectPos].frame = object.frame
+
+			if object.spinDirection == 0
+				object[tempObjectPos].angle = object.angle
+			else
+				object[tempObjectPos].angle = object.angle
+				FlipSign(object[tempObjectPos].angle)
+				object[tempObjectPos].angle += 0x100
+				object[tempObjectPos].angle &= 0x1FF
+			end if
+
+			object[tempObjectPos].speed = -0x10000
+			object[tempObjectPos].scaleSpeed = 16
+			Rand(object[tempObjectPos].rotateSpeed, 32)
+			object[tempObjectPos].rotateSpeed -= 16
+		end if
+
+		object.angle -= object.angleOffset
+		object.angle &= 0x1FF
+		object.charPos.x += 0x80000
+		temp0++
+		object.messageLength--
+	loop
+end function
+
+
+// ========================
+// Events
+// ========================
+
+event ObjectUpdate
+	switch object.propertyValue
+	case TEXTMESSAGE_COOL
+	case TEXTMESSAGE_PLAYERPLAYER
+		if object.timer < 120
+			object.timer++
+		else
+			object.angle = 96
+			CallFunction(TextMessage_SetupTextChars)
+			ResetObjectEntity(object.entityPos, TypeName[Blank Object], 0, 0, 0)
+		end if
+		break
+
+	case TEXTMESSAGE_NOTENOUGH
+		if object.timer < 120
+			object.timer++
+		else
+			object.spinDirection = 0
+			object.textMessage = MESSAGE_NOTENOUGH
+			object.ypos = 116
+			object.angle = 96
+			CallFunction(TextMessage_SetupTextChars)
+
+			object.spinDirection = 1
+			object.ypos += 22
+			object.textMessage = MESSAGE_RINGS
+			object.angle = 96
+			CallFunction(TextMessage_SetupTextChars)
+
+			ResetObjectEntity(object.entityPos, TypeName[Blank Object], 0, 0, 0)
+		end if
+		break
+
+	case TEXTMESSAGE_GETRINGS
+	case TEXTMESSAGE_MOSTRINGSWIN
+		if object.timer < 90
+			object.timer++
+		else
+			object.angle = 96
+			CallFunction(TextMessage_SetupTextChars)
+			ResetObjectEntity(object.entityPos, TypeName[Blank Object], 0, 0, 0)
+		end if
+		break
+
+	case TEXTMESSAGE_RINGREMINDER
+		if stage.player2Enabled == true
+			temp0 = player[2].rings
+			temp0 += player[3].rings
+		else
+			temp0 = player[2].rings
+		end if
+
+		GetTableValue(temp1, SpecialSetup_checkpointID, SpecialSetup_ringCountTable)
+		if temp0 < temp1
+			object.animationTimer = 0
+		else
+			if object.animationTimer < 30
+				object.animationTimer++
+			end if
+		end if
+
+		CheckLower(temp0, temp1)
+		temp2 = checkResult
+		CheckLower(object.animationTimer, 30)
+		temp2 |= checkResult
+		if temp2 == true
+			GetBit(object.visible, object.timer, 2)
+			object.timer++
+			object.timer &= 7
+			object.number = temp1
+			object.number -= temp0
+			if object.number < 0
+				object.number = 0
+			end if
+		else
+			object.visible = false
+		end if
+		break
+
+	case TEXTMESSAGE_P1WINS
+	case TEXTMESSAGE_P2WINS
+	case TEXTMESSAGE_TIE
+		if object.timer < 90
+			object.timer++
+		else
+			object.angle = 96
+			CallFunction(TextMessage_SetupTextChars)
+			ResetObjectEntity(object.entityPos, TypeName[Blank Object], 0, 0, 0)
+			if SpecialSetup_checkpointID < 3
+				player[2].rings = 0
+				player[3].rings = 0
+			end if
+		end if
+		break
+
+	case TEXTMESSAGE_ANICHARACTER
+		object.xpos += object.xvel
+		object.ypos += object.yvel
+		object.scale += object.scaleSpeed
+		object.rotation += object.rotateSpeed
+		object.rotation &= 0x1FF
+		object.speed -= 0x8000
+		object.scaleSpeed++
+
+		Cos(object.yvel, object.angle)
+		object.yvel *= object.speed
+		object.yvel >>= 9
+
+		Sin(object.xvel, object.angle)
+		object.xvel *= object.speed
+		object.xvel >>= 9
+
+		if object.timer < 120
+			object.timer++
+		else
+			object.type = TypeName[Blank Object]
+		end if
+		break
+		
+	end switch
+end event
+
+
+event ObjectDraw
+	switch object.propertyValue
+	case TEXTMESSAGE_COOL
+		object.ypos = 116
+		object.textMessage = MESSAGE_COOL
+		CallFunction(TextMessage_DrawMessage)
+		break
+
+	case TEXTMESSAGE_NOTENOUGH
+		object.textMessage = MESSAGE_NOTENOUGH
+		object.ypos = 116
+		CallFunction(TextMessage_DrawMessage)
+
+		object.ypos += 22
+		object.textMessage = MESSAGE_RINGS
+		CallFunction(TextMessage_DrawMessage)
+		break
+
+	case TEXTMESSAGE_GETRINGS
+		object.ypos = 116
+		if object.number > 99
+			object.textMessage = MESSAGE_GETRINGS3
+			CallFunction(TextMessage_DrawMessage)
+		else
+			if object.number > 9
+				object.textMessage = MESSAGE_GETRINGS2
+				CallFunction(TextMessage_DrawMessage)
+			else
+				object.textMessage = MESSAGE_GETRINGS1
+				CallFunction(TextMessage_DrawMessage)
+			end if
+		end if
+		break
+
+	case TEXTMESSAGE_RINGREMINDER
+		if object.visible == true
+			object.ypos = 64
+			if object.number > 99
+				object.textMessage = MESSAGE_RINGSTOGO3
+				CallFunction(TextMessage_DrawMessage)
+			else
+				if object.number > 9
+					object.textMessage = MESSAGE_RINGSTOGO2
+					CallFunction(TextMessage_DrawMessage)
+				else
+					if object.number == 1
+						object.textMessage = MESSAGE_RINGTOGO
+						CallFunction(TextMessage_DrawMessage)
+					else
+						object.textMessage = MESSAGE_RINGSTOGO1
+						CallFunction(TextMessage_DrawMessage)
+					end if
+				end if
+			end if
+		end if
+		break
+
+	case TEXTMESSAGE_PLAYERPLAYER
+		object.ypos = 116
+		object.textMessage = MESSAGE_PLAYERPLAYER
+		CallFunction(TextMessage_DrawMessage)
+		break
+
+	case TEXTMESSAGE_MOSTRINGSWIN
+		object.ypos = 116
+		object.textMessage = MESSAGE_MOSTRINGSWINS
+		CallFunction(TextMessage_DrawMessage)
+		break
+
+	case TEXTMESSAGE_P1WINS
+		object.ypos = 116
+		object.textMessage = MESSAGE_P1WINS
+		CallFunction(TextMessage_DrawMessage)
+		break
+
+	case TEXTMESSAGE_P2WINS
+		object.ypos = 116
+		object.textMessage = MESSAGE_P2WINS
+		CallFunction(TextMessage_DrawMessage)
+		break
+
+	case TEXTMESSAGE_TIE
+		object.ypos = 68
+		object.textMessage = MESSAGE_TIE
+		CallFunction(TextMessage_DrawMessage)
+		break
+		
+	case TEXTMESSAGE_ANICHARACTER
+		temp0 = object.xpos
+		temp0 >>= 16
+		temp0 += screen.xcenter
+
+		temp1 = object.ypos
+		temp1 >>= 16
+
+		DrawSpriteScreenFX(object.frame, FX_ROTOZOOM, temp0, temp1)
+		break
+		
+	end switch
+end event
+
+
+event ObjectStartup
+	LoadSpriteSheet("Special/Objects.gif")
+	
+	// Here, we set up just about an entire font in Sprite Frames
+	SpriteFrame(0, 0, 0, 0, 0, 0) // 0
+	SpriteFrame(0, 0, 0, 0, 0, 0) // 1
+	SpriteFrame(0, 0, 0, 0, 0, 0) // 2
+	SpriteFrame(0, 0, 0, 0, 0, 0) // 3
+	SpriteFrame(0, 0, 0, 0, 0, 0) // 4
+	SpriteFrame(0, 0, 0, 0, 0, 0) // 5
+	SpriteFrame(0, 0, 0, 0, 0, 0) // 6
+	SpriteFrame(0, 0, 0, 0, 0, 0) // 7
+	SpriteFrame(0, 0, 0, 0, 0, 0) // 8
+	SpriteFrame(0, 0, 0, 0, 0, 0) // 9
+	SpriteFrame(0, 0, 0, 0, 0, 0) // A
+	SpriteFrame(0, 0, 0, 0, 0, 0) // B
+	SpriteFrame(0, 0, 0, 0, 0, 0) // C
+	SpriteFrame(0, 0, 0, 0, 0, 0) // D
+	SpriteFrame(0, 0, 0, 0, 0, 0) // E
+	SpriteFrame(0, 0, 0, 0, 0, 0) // F
+	SpriteFrame(0, 0, 0, 0, 0, 0) // G
+	SpriteFrame(0, 0, 0, 0, 0, 0) // H
+	SpriteFrame(0, 0, 0, 0, 0, 0) // I
+	SpriteFrame(0, 0, 0, 0, 0, 0) // J
+	SpriteFrame(0, 0, 0, 0, 0, 0) // K
+	SpriteFrame(0, 0, 0, 0, 0, 0) // L
+	SpriteFrame(0, 0, 0, 0, 0, 0) // M
+	SpriteFrame(0, 0, 0, 0, 0, 0) // N
+	SpriteFrame(0, 0, 0, 0, 0, 0) // O
+	SpriteFrame(0, 0, 0, 0, 0, 0) // P
+	SpriteFrame(0, 0, 0, 0, 0, 0) // Q
+	SpriteFrame(0, 0, 0, 0, 0, 0) // R
+	SpriteFrame(0, 0, 0, 0, 0, 0) // S
+	SpriteFrame(0, 0, 0, 0, 0, 0) // T
+	SpriteFrame(0, 0, 0, 0, 0, 0) // U
+	SpriteFrame(0, 0, 0, 0, 0, 0) // Supposed to be V, actually placeholder dash instead
+	SpriteFrame(0, 0, 0, 0, 0, 0) // W
+	SpriteFrame(0, 0, 0, 0, 0, 0) // Supposed to be X, actually placeholder dash instead
+	SpriteFrame(0, 0, 0, 0, 0, 0) // Y
+	SpriteFrame(0, 0, 0, 0, 0, 0) // Supposed to be Z, actually placeholder dash instead
+	SpriteFrame(0, 0, 0, 0, 0, 0) // . (Period)
+	SpriteFrame(0, 0, 0, 0, 0, 0) // ! (Exclamation mark)
+	SpriteFrame(0, 0, 0, 0, 0, 0) // VS yellow tag
+
+	SetupMenu(MENU_1, 0, 3, 1)
+	
+	// Here, all the texts to be displayed are set up
+	// The characters of #, $, and % are special, they display object.number's hundreds, tens, and ones place, respectively
+	AddMenuEntry(MENU_1, "COOL!", false)
+	AddMenuEntry(MENU_1, "NOT ENOUGH", false)
+	AddMenuEntry(MENU_1, "RINGS ... ", false)
+	AddMenuEntry(MENU_1, "GET % RINGS!", false)
+	AddMenuEntry(MENU_1, "GET $% RINGS!", false)
+	AddMenuEntry(MENU_1, "GET #$% RINGS!", false)
+	AddMenuEntry(MENU_1, "% RING TO GO!", false)
+	AddMenuEntry(MENU_1, "% RINGS TO GO!", false)
+	AddMenuEntry(MENU_1, "$% RINGS TO GO!", false)
+	AddMenuEntry(MENU_1, "#$% RINGS TO GO!", false)
+	AddMenuEntry(MENU_1, "PLAYER & PLAYER", false)
+	AddMenuEntry(MENU_1, "MOST RINGS WINS!", false)
+	AddMenuEntry(MENU_1, "PLAYER ONE WINS!", false)
+	AddMenuEntry(MENU_1, "PLAYER TWO WINS!", false)
+	AddMenuEntry(MENU_1, "TIE!", false)
+end event
+
+
+// ========================
+// Editor Events
+// ========================
+
+event RSDKDraw
+	DrawSprite(0)
+end event
+
+
+event RSDKLoad
+	LoadSpriteSheet("Global/Display.gif")
+	SpriteFrame(0, 0, 0, 0, 0, 0)
+	
+	SetVariableAlias(ALIAS_VAR_PROPVAL, "unused")
+end event
