@@ -1,11 +1,20 @@
 # Keingz's RSDKv4 Decompilation Mods
 - Here you can see my Sonic the Hedgehog (2013) and Sonic the Hedgehog 2 (2013) mods.
 - Please note that you must have the game, along with the decompilation to be able to use the mods.
-# Downloads
-- You can download Sonic the Hedgehog (2013) [here](https://play.google.com/store/apps/details?id=com.sega.sonic1px&hl=en).
-- You can download Sonic the Hedgehog 2 (2013) [here](https://play.google.com/store/apps/details?id=com.sega.sonic2.runner&hl=en).
-- You can download The RSDKv4 (For Sonic the Hedgehog (2013) and Sonic the Hedgehog 2 (2013) Decompilation [here](https://github.com/RSDKModding/RSDKv4-Decompilation)
-- You can download The RSDKv4 Scripts (For Sonic the Hedgehog (2013) and Sonic the Hedgehog 2 (2013) Decompilation [here](https://github.com/RSDKModding/RSDKv4-Script-Decompilation)
+- You can get official releases of Sonic 1 & Sonic 2 from:
+  * Windows
+    * Via Steam, from [Sonic Origins](https://store.steampowered.com/app/1794960)
+    * Via the Epic Games Store, from [Sonic Origins](https://store.epicgames.com/en-US/p/sonic-origins)
+  * iOS
+    * [Sonic 1, Via the App Store](https://apps.apple.com/au/app/sonic-the-hedgehog-classic/id316050001)
+    * [Sonic 2, Via the App Store](https://apps.apple.com/au/app/sonic-the-hedgehog-2-classic/id347415188)
+    * A tutorial for finding the game assets from the iOS versions can be found [here](https://gamebanana.com/tuts/14491).
+  * Android
+    * [Sonic 1, Via Google Play](https://play.google.com/store/apps/details?id=com.sega.sonic1px)
+    * [Sonic 2, Via Google Play](https://play.google.com/store/apps/details?id=com.sega.sonic2.runner)
+    * [Sonic 1, Via Amazon](https://www.amazon.com.au/Sega-of-America-Sonic-Hedgehog/dp/B00D74DVKM)
+    * [Sonic 2, Via Amazon](https://www.amazon.com.au/Sega-of-America-Sonic-Hedgehog/dp/B00HAPRVWS)
+    * A tutorial for finding the game assets from the Android versions can be found [here](https://gamebanana.com/tuts/14492).
 # [Keingz's](https://gamebanana.com/members/2095392) Gamebanana
 # Mods Preview [Sonic the Hedgehog (2013)]
 # Chaotix HUD in Sonic the Hedgehog (2013)
